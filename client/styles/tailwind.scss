@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@responsive {
+  .bg-image-home {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+        to left,
+        rgba(39, 39, 39, 0.9),
+        rgba(39, 39, 39, 0.3)
+      ),
+      url('/images/person/person-1.png') center top/cover;
+  }
+
+  .form__container {
+    position: relative;
+    overflow: hidden;
+    height: 70px;
+    width: 25%;
+    display: flex;
+
+    input {
+      position: absolute;
+      color: #595f6e;
+      outline: 0;
+      border: 0;
+      height: 32px;
+      bottom: 0;
+      padding-left: 1rem;
+    }
+
+    label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border-bottom: 1px solid #000;
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        bottom: -1px;
+        left: 0;
+        border-bottom: 3px solid #5fa8d3;
+        transform: translateX(-100%);
+        transition: all 0.5s ease-in-out;
+        overflow: hidden;
+      }
+    }
+
+    input:focus + .form__label .form__span-name,
+    input:valid + .form__label .form__span-name {
+      transform: translateY(-150%);
+      transition: all 0.3s ease;
+      color: #49a6e9;
+    }
+
+    input:focus + .form__label::after,
+    input:valid + .form__label::after {
+      transform: translateX(0);
+      transition: all 0.5s ease-in-out;
+    }
+  }
+
+  .form__span-name {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    transition: #49a6e9;
+  }
+
+  .form__button--submit {
+    border: none;
+    background: #49a6e9;
+    color: white;
+    text-transform: capitalize;
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+    height: 30px;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    &:hover {
+      background: #8bcbf9;
+      color: black;
+    }
+  }
+}

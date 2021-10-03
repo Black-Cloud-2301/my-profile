@@ -1,0 +1,10 @@
+query Menu {
+  menu {
+    id
+    title
+    category
+    price
+    image
+    desc
+  }
+}

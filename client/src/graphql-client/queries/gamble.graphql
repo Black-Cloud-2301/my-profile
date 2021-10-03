@@ -1,0 +1,9 @@
+query Gamble {
+  gamble {
+    id
+    image
+    value
+    suit
+    suitValue
+  }
+}

@@ -1,0 +1,9 @@
+query Tours {
+  tours {
+    id
+    name
+    info
+    image
+    price
+  }
+}

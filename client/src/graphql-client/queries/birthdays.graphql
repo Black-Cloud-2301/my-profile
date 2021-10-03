@@ -1,0 +1,10 @@
+query People {
+  people {
+    id
+    name
+    birthday
+    image
+    title
+    quote
+  }
+}
