@@ -20,30 +20,24 @@ interface ArrayProps {
   father: number[][][];
 }
 
-export function BestFirstSearch(newArray: number[][]) {
+export function BeamSearch(newArray: number[][]) {
   const arrStatePass: number[][][] = [];
-  const queue: ArrayProps[] = [];
+  const stack: ArrayProps[] = [];
   arrStatePass.push(newArray);
-  queue.push({
+  stack.push({
     array: [[...newArray[0]], [...newArray[1]], [...newArray[2]]],
     father: [],
   });
 
-  let x = 0;
   while (true) {
-    x++;
-    const tempArray: ArrayProps | undefined = queue.shift();
+    const tempStack: ArrayProps[] = [];
+    const tempArray: ArrayProps | undefined = stack.pop();
     const search: number = 0;
 
     if (tempArray) {
-      if (isEquals(tempArray.array, targetArray)) {
-        console.log(tempArray.father);
-        console.log('Founded');
-        return tempArray.father;
-      }
-
       const row = tempArray.array.findIndex((row) => row.includes(search));
       const col = tempArray.array[row].indexOf(search);
+
       if (row === 0) {
         let newTempArray1: number[][] = [];
         for (let i = 0; i < arrLength; i++) {
@@ -51,7 +45,7 @@ export function BestFirstSearch(newArray: number[][]) {
         }
         swapArray2d(newTempArray1, row, col, row + 1, col);
         if (!isExist(newTempArray1, arrStatePass)) {
-          queue.push({
+          tempStack.push({
             array: [
               [...newTempArray1[0]],
               [...newTempArray1[1]],
@@ -76,7 +70,7 @@ export function BestFirstSearch(newArray: number[][]) {
           }
           swapArray2d(newTempArray2, row, col, row, col + 1);
           if (!isExist(newTempArray2, arrStatePass)) {
-            queue.push({
+            tempStack.push({
               array: [
                 [...newTempArray2[0]],
                 [...newTempArray2[1]],
@@ -101,7 +95,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray3, row, col, row, col - 1);
             if (!isExist(newTempArray3, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray3[0]],
                   [...newTempArray3[1]],
@@ -125,7 +119,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray4, row, col, row, col - 1);
             if (!isExist(newTempArray4, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray4[0]],
                   [...newTempArray4[1]],
@@ -148,7 +142,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray5, row, col, row, col + 1);
             if (!isExist(newTempArray5, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray5[0]],
                   [...newTempArray5[1]],
@@ -174,7 +168,7 @@ export function BestFirstSearch(newArray: number[][]) {
         }
         swapArray2d(newTempArray6, row, col, row - 1, col);
         if (!isExist(newTempArray6, arrStatePass)) {
-          queue.push({
+          tempStack.push({
             array: [
               [...newTempArray6[0]],
               [...newTempArray6[1]],
@@ -198,7 +192,7 @@ export function BestFirstSearch(newArray: number[][]) {
           }
           swapArray2d(newTempArray7, row, col, row, col + 1);
           if (!isExist(newTempArray7, arrStatePass)) {
-            queue.push({
+            tempStack.push({
               array: [
                 [...newTempArray7[0]],
                 [...newTempArray7[1]],
@@ -224,7 +218,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray8, row, col, row, col - 1);
             if (!isExist(newTempArray8, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray8[0]],
                   [...newTempArray8[1]],
@@ -248,7 +242,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray9, row, col, row, col - 1);
             if (!isExist(newTempArray9, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray9[0]],
                   [...newTempArray9[1]],
@@ -272,7 +266,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray10, row, col, row, col + 1);
             if (!isExist(newTempArray10, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray10[0]],
                   [...newTempArray10[1]],
@@ -298,7 +292,7 @@ export function BestFirstSearch(newArray: number[][]) {
         }
         swapArray2d(newTempArray11, row, col, row - 1, col);
         if (!isExist(newTempArray11, arrStatePass)) {
-          queue.push({
+          tempStack.push({
             array: [
               [...newTempArray11[0]],
               [...newTempArray11[1]],
@@ -321,7 +315,7 @@ export function BestFirstSearch(newArray: number[][]) {
         }
         swapArray2d(newTempArray12, row, col, row + 1, col);
         if (!isExist(newTempArray12, arrStatePass)) {
-          queue.push({
+          tempStack.push({
             array: [
               [...newTempArray12[0]],
               [...newTempArray12[1]],
@@ -346,7 +340,7 @@ export function BestFirstSearch(newArray: number[][]) {
           }
           swapArray2d(newTempArray13, row, col, row, col + 1);
           if (!isExist(newTempArray13, arrStatePass)) {
-            queue.push({
+            tempStack.push({
               array: [
                 [...newTempArray13[0]],
                 [...newTempArray13[1]],
@@ -372,7 +366,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray14, row, col, row, col - 1);
             if (!isExist(newTempArray14, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray14[0]],
                   [...newTempArray14[1]],
@@ -398,7 +392,7 @@ export function BestFirstSearch(newArray: number[][]) {
             swapArray2d(newTempArray15, row, col, row, col - 1);
 
             if (!isExist(newTempArray15, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray15[0]],
                   [...newTempArray15[1]],
@@ -422,7 +416,7 @@ export function BestFirstSearch(newArray: number[][]) {
             }
             swapArray2d(newTempArray16, row, col, row, col + 1);
             if (!isExist(newTempArray16, arrStatePass)) {
-              queue.push({
+              tempStack.push({
                 array: [
                   [...newTempArray16[0]],
                   [...newTempArray16[1]],
@@ -442,15 +436,23 @@ export function BestFirstSearch(newArray: number[][]) {
           }
         }
       }
-      queue.sort(function (a, b) {
+
+      tempStack.sort(function (a, b) {
         return evaluate(a.array, targetArray) - evaluate(b.array, targetArray);
       });
-
-      // for (let z = 0; z < queue.length; z++) {
-      //   // console.log(queue[z].array);
-      //   console.log('evaluate', evaluate(queue[z].array, targetArray));
+      for (let i = tempStack.length - 1; i >= 0; i--) {
+        stack.push(tempStack[i]);
+        if (isEquals(tempStack[i].array, targetArray)) {
+          console.log(tempStack[i].father);
+          console.log('Founded');
+          return tempStack[i].father;
+        }
+      }
+      // for (let z = 0; z < stack.length; z++) {
+      //   console.log(stack[z].array);
+      //   console.log('evaluate', evaluate(stack[z].array, targetArray));
       // }
-      console.log(queue.length);
+      console.log(stack.length);
     }
   }
   return arrStatePass;

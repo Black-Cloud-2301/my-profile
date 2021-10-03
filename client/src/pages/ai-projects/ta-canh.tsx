@@ -42,14 +42,14 @@ for (let i = 0; i < arrLength; i++) {
 }
 
 let newArray: number[][] = [
-  [1, 4, 3],
-  [7, 0, 6],
-  [5, 8, 2],
+  [5, 2, 1],
+  [3, 8, 0],
+  [6, 4, 7],
 ];
 
-// for (let i = 0; i < array.length; i++) {
-//   newArray[i] = array[i].slice();
-// }
+for (let i = 0; i < array.length; i++) {
+  newArray[i] = array[i].slice();
+}
 let tempFatherArray: number[][][] = [];
 tempFatherArray.push(newArray);
 
@@ -116,9 +116,19 @@ const TaCanh = () => {
       <header className='flex w-6/12 justify-around items-center mb-8'>
         <button
           className='bg-gray-300 text-white text-2xl font-semibold px-2 py-1 rounded hover:bg-red-500'
-          onClick={() => setIndex(index + 1)}
+          onClick={async () => {
+            const worker = new Worker(
+              new URL('src/worker/best-first-search.worker.ts', import.meta.url)
+            );
+            const { BestFirstSearch } =
+              wrap<
+                import('src/worker/best-first-search.worker').BestFirstSearchWorker
+              >(worker);
+            setIndex(0);
+            setFather(await BestFirstSearch(newArray));
+          }}
         >
-          Run
+          BFS
         </button>
         <button
           className='bg-gray-300 text-white text-2xl font-semibold px-2 py-1 rounded hover:bg-blue-500'
@@ -130,10 +140,46 @@ const TaCanh = () => {
               wrap<import('src/worker/dfs-depthLS.worker').DFSDepthLSWorker>(
                 worker
               );
+            setIndex(0);
             setFather(await DFSDepthLS(newArray));
           }}
         >
           DFS
+        </button>
+        <button
+          className='bg-gray-300 text-white text-2xl font-semibold px-2 py-1 rounded hover:bg-blue-500'
+          onClick={async () => {
+            const worker = new Worker(
+              new URL('src/worker/beam-search.worker.ts', import.meta.url)
+            );
+            const { BeamSearch } =
+              wrap<import('src/worker/beam-search.worker').BeamSearchWorker>(
+                worker
+              );
+            setIndex(0);
+            setFather(await BeamSearch(newArray));
+          }}
+        >
+          Beam
+        </button>
+        <button
+          className='bg-gray-300 text-white text-2xl font-semibold px-2 py-1 rounded hover:bg-blue-500'
+          onClick={async () => {
+            const worker = new Worker(
+              new URL(
+                'src/worker/artificial-intelligence.worker.ts',
+                import.meta.url
+              )
+            );
+            const { ArtificialIntelligence } =
+              wrap<
+                import('src/worker/artificial-intelligence.worker').ArtificialIntelligenceWorker
+              >(worker);
+            setIndex(0);
+            setFather(await ArtificialIntelligence(newArray));
+          }}
+        >
+          Climb
         </button>
       </header>
       <div className='relative bg-gray-300 w-104 2xl:w-160 h-104 2xl:h-160'>
