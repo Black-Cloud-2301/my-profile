@@ -47,9 +47,9 @@ let newArray: number[][] = [
   [5, 8, 2],
 ];
 
-for (let i = 0; i < array.length; i++) {
-  newArray[i] = array[i].slice();
-}
+// for (let i = 0; i < array.length; i++) {
+//   newArray[i] = array[i].slice();
+// }
 let tempFatherArray: number[][][] = [];
 tempFatherArray.push(newArray);
 
