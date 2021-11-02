@@ -1,12 +1,7 @@
+import { targetArray } from '@pages/ai-projects/ta-canh';
 import { evaluate, isEquals, isExist, swapArray2d } from './functions';
 
 let arrLength = 3;
-
-const targetArray: number[][] = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 0],
-];
 
 // let h1 = 0;
 // for (let i = 0; i < arrLength; i++) {
@@ -21,6 +16,7 @@ interface ArrayProps {
 }
 
 export function BestFirstSearch(newArray: number[][]) {
+  let t0 = performance.now();
   const arrStatePass: number[][][] = [];
   const queue: ArrayProps[] = [];
   arrStatePass.push(newArray);
@@ -29,9 +25,8 @@ export function BestFirstSearch(newArray: number[][]) {
     father: [],
   });
 
-  let x = 0;
   while (true) {
-    x++;
+    // for (let x = 0; x < 1000; x++) {
     const tempArray: ArrayProps | undefined = queue.shift();
     const search: number = 0;
 
@@ -39,6 +34,8 @@ export function BestFirstSearch(newArray: number[][]) {
       if (isEquals(tempArray.array, targetArray)) {
         console.log(tempArray.father);
         console.log('Founded');
+        let t1 = performance.now();
+        console.log(t1 - t0);
         return tempArray.father;
       }
 
@@ -447,11 +444,11 @@ export function BestFirstSearch(newArray: number[][]) {
       });
 
       // for (let z = 0; z < queue.length; z++) {
-      //   // console.log(queue[z].array);
-      //   console.log('evaluate', evaluate(queue[z].array, targetArray));
+      // console.log(queue);
+      // console.log('evaluate', evaluate(queue[0].array, targetArray));
       // }
-      console.log(queue.length);
+      if (queue.length % 1000 === 0) console.log(queue.length);
     }
   }
-  return arrStatePass;
+  return [newArray];
 }

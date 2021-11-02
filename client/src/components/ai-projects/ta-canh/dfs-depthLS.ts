@@ -1,3 +1,5 @@
+import { targetArray } from '@pages/ai-projects/ta-canh';
+
 interface ArrayProps {
   array: number[][];
   father: number[][][];
@@ -14,12 +16,6 @@ function isEquals(array: number[][], array2: number[][]) {
   return true;
 }
 
-const targetArray: number[][] = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 0],
-];
-
 function swapArray2d(
   array: number[][],
   x: number,
@@ -33,6 +29,8 @@ function swapArray2d(
 }
 
 export const DFSDepthLS = (newArray: number[][]) => {
+  let t0 = performance.now();
+
   let depth = 3;
   const father: number[][][] = [];
   father.push(newArray);
@@ -71,6 +69,8 @@ export const DFSDepthLS = (newArray: number[][]) => {
           }
           console.log(father);
           console.log('Founded');
+          let t1 = performance.now();
+          console.log(t1 - t0);
           return father;
         }
         if (tempArrQueue2?.father.length >= depth) continue;
@@ -448,5 +448,5 @@ export const DFSDepthLS = (newArray: number[][]) => {
       }
     }
   }
-  return [];
+  return [newArray];
 };

@@ -31,6 +31,12 @@ if (arrLength === 4) {
   ];
 }
 
+export const targetArray: number[][] = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+];
+
 let tempArr = defaultArr.slice(0, arrLength * arrLength).sort(function () {
   return Math.random() - 0.5;
 });
@@ -42,14 +48,14 @@ for (let i = 0; i < arrLength; i++) {
 }
 
 let newArray: number[][] = [
-  [5, 2, 1],
-  [3, 8, 0],
-  [6, 4, 7],
+  [7, 2, 4],
+  [5, 0, 6],
+  [8, 3, 1],
 ];
 
-for (let i = 0; i < array.length; i++) {
-  newArray[i] = array[i].slice();
-}
+// for (let i = 0; i < array.length; i++) {
+//   newArray[i] = array[i].slice();
+// }
 let tempFatherArray: number[][][] = [];
 tempFatherArray.push(newArray);
 
@@ -113,7 +119,7 @@ const TaCanh = () => {
 
   return (
     <main className='flex flex-col justify-center items-center h-screen'>
-      <header className='flex w-6/12 justify-around items-center mb-8'>
+      <header className='flex justify-between w-104 2xl:w-160 items-center mb-8'>
         <button
           className='bg-gray-300 text-white text-2xl font-semibold px-2 py-1 rounded hover:bg-red-500'
           onClick={async () => {

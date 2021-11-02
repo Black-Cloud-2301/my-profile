@@ -1,12 +1,7 @@
+import { targetArray } from '@pages/ai-projects/ta-canh';
 import { evaluate, isEquals, isExist, swapArray2d } from './functions';
 
 let arrLength = 3;
-
-const targetArray: number[][] = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 0],
-];
 
 // let h1 = 0;
 // for (let i = 0; i < arrLength; i++) {
@@ -21,6 +16,7 @@ interface ArrayProps {
 }
 
 export function ArtificialIntelligence(newArray: number[][]) {
+  let t0 = performance.now();
   const arrStatePass: number[][][] = [];
   const stack: ArrayProps[] = [];
   arrStatePass.push(newArray);
@@ -445,15 +441,17 @@ export function ArtificialIntelligence(newArray: number[][]) {
         if (isEquals(tempStack[i].array, targetArray)) {
           console.log(tempStack[i].father);
           console.log('Founded');
+          let t1 = performance.now();
+          console.log(t1 - t0);
           return tempStack[i].father;
         }
       }
       // for (let z = 0; z < stack.length; z++) {
       //   console.log(stack[z].array);
-      //   console.log('evaluate', evaluate(stack[z].array, targetArray));
+      // console.log('evaluate', evaluate(stack[stack.length-1].array, targetArray));
       // }
-      console.log(stack.length);
+      if (stack.length % 1000 === 0) console.log(stack.length);
     }
   }
-  return arrStatePass;
+  return [newArray];
 }
